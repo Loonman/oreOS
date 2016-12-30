@@ -1,6 +1,6 @@
 .PHONY: iso
 
-iso:
+iso: kernel
 	genisoimage -R \
             -b boot/grub/stage2_eltorito \
             -no-emul-boot \
@@ -11,3 +11,9 @@ iso:
             -boot-info-table \
             -o oreOS.iso \
             iso
+
+kernel: link.ld loader.o
+	ld -T link.ld -melf_i386 loader.o -o kernel.elf
+
+loader.o : loader.s
+	nasm -f elf32 loader.s
