@@ -20,6 +20,15 @@ void serial_configure_baud_rate(unsigned short com, unsigned short divisor);
 */
 void serial_configure_line(unsigned short com);
 
-int serial_write(char * buf, unsigned int len);
+/** serial_write
+* Sends a buffer of length len to the specified serial port.
+* 
+* @param buf - The buffer to send
+* @param len - The length of the buffer
+* @param com - The COM port to use
+*/
+int serial_write(char * buf, unsigned int len, unsigned short com);
+
+int serial_is_transmit_fifo_empty(unsigned int com);
 
 #endif /* SERIAL_H */
