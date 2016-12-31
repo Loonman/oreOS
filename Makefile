@@ -1,16 +1,18 @@
-OBJECTS = loader.o kmain.o
+FRAMEBUFFEROBJ = io/framebuffer.o io/io.o io/write.o
+OBJECTS = loader.o kmain.o $(FRAMEBUFFEROBJ)
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf
+DEPENDENCIES = io
 
-all: kernel.elf
+all: kernel
 
 kernel: $(OBJECTS)
 	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
-iso: kernel
+iso: kernel dependencies
 	cp kernel.elf iso/boot/kernel.elf
 	genisoimage -R                          \
             -b boot/grub/stage2_eltorito    \
@@ -32,5 +34,10 @@ run: iso
 %.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
+.PHONY: dependencies
+
+dependencies: $(DEPENDENCIES)
+	(cd $<; make all)
+
 clean:
-	rm -rf *.o kernel.elf os.iso
+	rm -rf *.o kernel.elf oreOS.iso
