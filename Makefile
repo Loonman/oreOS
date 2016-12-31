@@ -12,7 +12,7 @@ kernel: $(OBJECTS)
 
 iso: kernel
 	cp kernel.elf iso/boot/kernel.elf
-	genisoimage -R                              \
+	genisoimage -R                          \
             -b boot/grub/stage2_eltorito    \
             -no-emul-boot                   \
             -boot-load-size 4               \
@@ -20,7 +20,7 @@ iso: kernel
             -input-charset utf8             \
             -quiet                          \
             -boot-info-table                \
-            -o oreOS.iso                       \
+            -o oreOS.iso                    \
             iso
 
 run: iso
