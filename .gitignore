@@ -31,3 +31,10 @@
 *.exe
 *.out
 *.app
+
+#disk images
+*.iso
+
+#logfiles
+bochslog.txt
+com1.out
