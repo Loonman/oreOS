@@ -1,4 +1,4 @@
-FRAMEBUFFEROBJ = io/framebuffer.o io/io.o io/write.o
+FRAMEBUFFEROBJ = io/framebuffer.o io/io.o io/write.o io/serial.o
 OBJECTS = loader.o kmain.o $(FRAMEBUFFEROBJ)
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
