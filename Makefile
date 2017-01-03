@@ -1,11 +1,12 @@
 FRAMEBUFFEROBJ = io/framebuffer.o io/io.o io/write.o io/serial.o io/log.o
-OBJECTS = loader.o kmain.o $(FRAMEBUFFEROBJ)
+MEMORYOBJ = memory/gdt.o memory/gdt_x86.o
+OBJECTS = loader.o kmain.o $(FRAMEBUFFEROBJ) $(MEMORYOBJ)
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf
-DEPENDENCIES = io
+DEPENDENCIES = io memory
 
 all: kernel
 
@@ -37,7 +38,15 @@ run: iso
 .PHONY: dependencies
 
 dependencies: $(DEPENDENCIES)
-	(cd $<; make all)
+	-for d in $(DEPENDENCIES); do (	cd $$d; make all); done
 
-clean:
+
+.PHONY: clean
+
+clean: clean_dependencies
 	rm -rf *.o kernel.elf oreOS.iso
+
+.PHONY: clean_dependencies
+
+clean_dependencies: $(DEPENDENCIES)
+	-for d in $(DEPENDENCIES); do (	cd $$d; make clean); done
