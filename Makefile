@@ -1,5 +1,6 @@
 FRAMEBUFFEROBJ = io/framebuffer.o io/io.o io/write.o io/serial.o io/log.o
-MEMORYOBJ = memory/gdt.o memory/gdt_x86.o
+MEMORYOBJ = memory/gdt.o memory/gdt_x86.o memory/idt.o memory/idt_x86.o
+LIBOBJ = lib/string.o
 OBJECTS = loader.o kmain.o $(FRAMEBUFFEROBJ) $(MEMORYOBJ)
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
