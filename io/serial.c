@@ -1,4 +1,4 @@
-#include "io.h" /* io.h is implement in the section "Moving the cursor" */
+#include "io.h"
 #include "serial.h"
 /* The I/O ports */
 
@@ -11,7 +11,7 @@
     *  @param com      The COM port to configure
     *  @param divisor  The divisor
     */
-void serial_configure_baud_rate(unsigned short com, unsigned short divisor)
+void serial_configure_baud_rate(uint16_t com, uint16_t divisor)
 {
     outb(SERIAL_LINE_COMMAND_PORT(com),SERIAL_LINE_ENABLE_DLAB);
     outb(SERIAL_DATA_PORT(com),(divisor >> 8) & 0x00FF);
@@ -25,7 +25,7 @@ void serial_configure_baud_rate(unsigned short com, unsigned short divisor)
 *
 *  @param com  The serial port to configure
 */
-void serial_configure_line(unsigned short com)
+void serial_configure_line(uint16_t com)
 {
     /* Bit:     | 7 | 6 | 5 4 3 | 2 | 1 0 |
      * Content: | d | b | prty  | s | dl  |
@@ -34,15 +34,15 @@ void serial_configure_line(unsigned short com)
     outb(SERIAL_LINE_COMMAND_PORT(com), 0x03);
 }
 
-int serial_is_transmit_fifo_empty(unsigned int com)
+uint32_t serial_is_transmit_fifo_empty(uint32_t com)
 {
     /* 0x20 = 0010 0000 */
     return inb(SERIAL_LINE_STATUS_PORT(com)) & 0x20;
 }
 
-int serial_write(char * buf, unsigned int len, unsigned short com)
+uint32_t serial_write(char * buf, uint32_t len, uint16_t com)
 {
-    unsigned int i = 0;
+    uint32_t i = 0;
     while (i < len)
     {
         if (serial_is_transmit_fifo_empty(com))
