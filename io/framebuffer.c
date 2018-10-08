@@ -1,9 +1,9 @@
 #include "framebuffer.h"
 #include "io.h"
 
-uint8_t * fb = (uint8_t *) 0x000B8010;
+char * fb = (char *) 0x000B8010;
 
-void fb_write_cell(uint8_t c, uint8_t fg, uint8_t bg, uint32_t pos)
+void fb_write_cell(char c, uint8_t fg, uint8_t bg, uint32_t pos)
 {
     fb[pos] = c;
     fb[pos + 1] = ((fg & 0x0F) << 4) | (bg & 0x0F);
