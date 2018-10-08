@@ -1,7 +1,9 @@
 #include "color.h"
+#include "../lib/stdint.h"
+
 struct frame {
-    unsigned short background_color : 4;
-    unsigned short foreground_color : 4;
+    uint16_t background_color : 4;
+    uint16_t foreground_color : 4;
     char letter;
 } __attribute__((packed));
 
@@ -12,8 +14,6 @@ typedef struct frame frame;
  * @param frame - the frame to Writes
  * @param pos - the position in the framebuffer
  */
-void fb_write_cell(char c, unsigned char fg, unsigned char bg, unsigned int pos);
+void fb_write_cell(char c, uint8_t fg, uint8_t bg, uint32_t pos);
 
-void fb_move_cursor(unsigned short pos);
-
-int write(char * buf, unsigned int len);
+void fb_move_cursor(uint16_t pos);
