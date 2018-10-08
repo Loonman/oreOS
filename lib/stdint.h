@@ -22,9 +22,9 @@ typedef long long int64_t;
 #endif // __64_BIT
 
 #ifndef __64_BIT
-typedef size_t uint32_t;
+typedef uint32_t size_t;
 #else // __64_BIT
-typedef size_t uint64_t;
+typedef uint64_t size_t;
 #endif // __64_BIT
 
 #endif /* STDINT_H */
