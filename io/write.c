@@ -1,10 +1,10 @@
 #include "write.h"
 #include "framebuffer.h"
-unsigned short cursor = 0;
+uint16_t cursor = 0;
 
-int write(char * buf, unsigned int len)
+int write(char * buf, size_t len)
 {
-    unsigned int i  = 0;
+    uint32_t i  = 0;
     while (i < len)
     {
         fb_write_cell(*buf, FB_BLACK, FB_WHITE, cursor);
