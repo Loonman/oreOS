@@ -14,11 +14,11 @@ typedef unsigned long long uint64_t;
 /**
  * Signed fixed width integers
  */
-typedef char uint8_t;
-typedef short uint16_t;
-typedef int uint32_t;
+typedef char int8_t;
+typedef short int16_t;
+typedef int int32_t;
 #ifdef __64_BIT
-typedef long long uint64_t;
+typedef long long int64_t;
 #endif // __64_BIT
 
 #ifndef __64_BIT
