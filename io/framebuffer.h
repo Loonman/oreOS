@@ -17,5 +17,3 @@ typedef struct frame frame;
 void fb_write_cell(char c, uint8_t fg, uint8_t bg, uint32_t pos);
 
 void fb_move_cursor(uint16_t pos);
-
-int write(uint8_t * buf, uint32_t len);
